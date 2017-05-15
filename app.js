@@ -1,6 +1,58 @@
-﻿var state = {items: []};
+﻿var state = {
+	questions: [
+		{
+			question:"What elements exist in fog computing?", 
+			answers:[
+				{answer:"dogs, cats, clouds"},
+				{answer:"hell, heaven, clouds"},
+				{answer:"fog, clouds, sun"},
+				{answer:"controllers, sensors, actuators",right:true}
+			]
+		},
+		{
+			question:"What elements exist in fog computing?", 
+			answers:[
+				{answer:"dogs, cats, clouds"},
+				{answer:"hell, heaven, clouds"},
+				{answer:"fog, clouds, sun"},
+				{answer:"controllers, sensors, actuators",right:true}
+			]
+		},
+		{
+			question:"What elements exist in fog computing?", 
+			answers:[
+				{answer:"dogs, cats, clouds"},
+				{answer:"hell, heaven, clouds"},
+				{answer:"fog, clouds, sun"},
+				{answer:"controllers, sensors, actuators",right:true}
+			]
+		},
+		{
+			question:"What elements exist in fog computing?", 
+			answers:[
+				{answer:"dogs, cats, clouds"},
+				{answer:"hell, heaven, clouds"},
+				{answer:"fog, clouds, sun"},
+				{answer:"controllers, sensors, actuators",right:true}
+			]
+		},
+		{
+			question:"What elements exist in fog computing?", 
+			answers:[
+				{answer:"dogs, cats, clouds"},
+				{answer:"hell, heaven, clouds"},
+				{answer:"fog, clouds, sun"},
+				{answer:"controllers, sensors, actuators",right:true}
+			]
+		}
+	],
+	user:{
+		answered: 0;
+		correct : 0;
+	}
+};
 
-function handleAddItem(){
+/*function handleAddItem(){
 	$("#js-shopping-list-form").submit(function(event){
 		event.preventDefault();
 		var item = $(this).find("input[type='text']").val();
@@ -39,7 +91,7 @@ function renderHtml(state,element){
       '</li>';
     });
 	element.html(itemsHTML);
-}
+}*/
 $(function(){
 	handleAddItem();
 	handleCheck();
