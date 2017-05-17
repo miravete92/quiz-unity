@@ -92,55 +92,122 @@
 		}
 	],
 	user:{
-		answered: 0;
-		correct : 0;
-		current: 0;
+		answered: 0,
+		correct : 0,
+		current: 0,
+		currentAnswered: false
 	}
-};
 
-/*function handleAddItem(){
-	$("#js-shopping-list-form").submit(function(event){
+};
+function initQuiz(){
+	$(".start").removeClass("hidden");
+	$(".question").addClass("hidden");
+	$(".end").addClass("hidden");
+}
+function startQuiz(){
+	for(var i = 0; i<state.questions.length;i++){
+		state.questions[i].answers = shuffle(state.questions[i].answers);
+	}
+	state.questions = shuffle(state.questions);
+
+	state.user.answered = 0;
+	state.user.correct = 0;
+	state.user.current = 0;
+	state.user.currentAnswered = false;
+
+	$(".js-numquestions").text(state.questions.length);
+	$(".js-correct").text("0");
+	$(".js-incorrect").text("0");
+	showQuestion(0);
+	$(".start").addClass("hidden");
+	$(".question").removeClass("hidden");
+	$(".end").addClass("hidden");
+
+}
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+function showQuestion(id){
+	state.user.currentAnswered=false;
+	$(".questionForm .questionNotifier").text("");
+	$(".js-currquestion").text(state.user.current+1);
+	$(".questionText").text(state.questions[id].question);
+	var questionsHtml="";
+	for(var i = 0; i<state.questions[id].answers.length; i++){
+		questionsHtml+='<input type="radio" name="answer" value="'+i+'"> <span>'+state.questions[id].answers[i].answer+'</span><br/>';
+	}
+	$(".questionAnswers").html(questionsHtml);
+	$(".questionForm input[type='radio']").prop('checked', false);
+	$(".questionForm input[type='submit']").prop('disabled', 'disabled');
+	$(".questionForm input[type='submit']").val("Check");
+}
+function showEnd(){
+	$(".start").addClass("hidden");
+	$(".question").addClass("hidden");
+	$(".end").removeClass("hidden");
+}
+function handleButtons(){
+	$(".buttonStart").click(function(event){
+		startQuiz();
+	});
+	$(".buttonRestart").click(function(event){
+		initQuiz();
+	});
+
+	$(".questionForm").submit(function(event){
 		event.preventDefault();
-		var item = $(this).find("input[type='text']").val();
-		$(this).find("input[type='text']").val("");
-		state.items[item]=true;
-		renderHtml(state,$(".shopping-list"));
+		if(state.user.currentAnswered){
+			state.user.current++;
+			if(state.user.current<state.questions.length){
+				showQuestion(state.user.current);
+			}
+			else{
+				showEnd();
+			}
+			
+		}
+		else{
+			state.user.currentAnswered=true;
+			$(".questionForm input[type='submit']").val("Next Answer");
+			var checkedRadio = $(".questionForm input[type='radio']:checked").val();
+			state.user.answered++;
+			if(state.questions[state.user.current].answers[checkedRadio].right){
+				$(".questionForm .questionNotifier").text("Correct!");
+				$(".questionForm .questionNotifier").removeClass("incorrect");
+				state.user.correct++;
+				$(".js-correct").text(state.user.correct);
+			}
+			else{
+				$(".questionForm .questionNotifier").text("Not correct!");
+				$(".questionForm .questionNotifier").addClass("incorrect");
+				$(".js-incorrect").text(state.user.answered-state.user.correct);
+			}
+			console.log("Checked: "+checkedRadio);
+			
+		}
+	});
+
+	$(".questionForm").on("click","input[type='radio']",function(event){
+		$(".questionForm input[type='submit']").prop('disabled', false);
 	});
 }
-function handleCheck(){
-	$(".shopping-list").on("click",".shopping-item-toggle",function(event){
-		var item = $(this).closest("li").find(".shopping-item").text();
-		state.items[item] = !state.items[item]
-		renderHtml(state,$(".shopping-list"));
-	});
-}
-function handleRemove(){
-	$(".shopping-list").on("click",".shopping-item-delete",function(event){
-		var item = $(this).closest("li").find(".shopping-item").text();
-		delete state.items[item];
-		renderHtml(state,$(".shopping-list"));
-		
-	});
-}
-function renderHtml(state,element){
-	var itemsHTML = Object.keys(state.items).map(function(item) {
-        return '<li>'+
-        '<span class="shopping-item '+(state.items[item] || 'shopping-item__checked')+'">'+item+'</span>'+
-        '<div class="shopping-item-controls">'+
-          '<button class="shopping-item-toggle">'+
-            '<span class="button-label">check</span>'+
-          '</button>'+
-          '<button class="shopping-item-delete">'+
-            '<span class="button-label">delete</span>'+
-          '</button>'+
-        '</div>'+
-      '</li>';
-    });
-	element.html(itemsHTML);
-}*/
 $(function(){
-	//handleAddItem();
-	//handleCheck();
-	//handleRemove();
+	initQuiz();
+	handleButtons();
 });
 	
