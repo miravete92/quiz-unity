@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Shopping List</title>
+  <title>Unity quiz</title>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
@@ -9,12 +9,38 @@
   <link rel="stylesheet" href="main.css">
 </head>
 <body>
-  <div class="question-card">
-      <div class="current-question">
-        
+  <header>
+  	<img class="logo"src="images/unity-logo.png">
+    <h2 class="logotext">Quiz</h2>
+  </header>
+  <main>
+  	<div class="question-card" >
+      <div class="start">
+        <p class="info">This test evaluates your Unity 5 skills. </p>
+        <p class="info">Press 'Start Quiz' to begin.</p>
+      	<button class="buttonStart">Start Quiz</button>
+      </div>
+      <div class="question">
+      	<h4 class="count"><span class="js-currquestion">0</span> out of <span class="js-numquestions">10</span></h4>
+        <form class="questionAnswers" action="">
+        		<h3 class="questionText">What question is this question?</h3>
+      			<input type="radio" name="answer" value="male"> <span>Response 1</span><br/>
+      			<input type="radio" name="answer" value="female"> <span>Response 2</span><br/>
+      			<input type="radio" name="answer" value="other"> <span>Response 3</span><br/>
+      			<input type="radio" name="answer" value="cat"> <span>Response 4</span><br/>
+      			<input type="submit" name="Submit" value="Ckeck">
+  		  </form>
+        <h4 class="count"><span class="js-correct">0</span> correct, <span class="js-incorrect">0</span> incorrect</h4>
+      </div>
+      <div class="end">
+      	<h2 class="score">Congratulations!</h2>
+        <h4 class="count"><span class="js-correct">0</span> correct, <span class="js-incorrect">0</span> incorrect</h4>
+      	<button class="buttonStart">Restart Quiz</button>
       </div>
 
-  </div>
+  	</div>
+  </main>
+  
 <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
 <script type="text/javascript" src="./app.js"></script>
 </body>
