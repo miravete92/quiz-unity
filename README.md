@@ -1,3 +1,3 @@
-# Shopping List App Challenge
+# Quiz App Challenge
 
-This repo contains starter files for the *Shopping List App* challenge in Thinkful's Front End Web Development course.
+This is a quiz about Unity developed by Alberto Miravete
