@@ -68,8 +68,8 @@
 			answers:[
 				{answer:"BoxCollider"},
 				{answer:"BoxTrigger"},
-				{answer:"SphereTrigger",right:true},
-				{answer:"SphereCollider"}
+				{answer:"SphereTrigger"},
+				{answer:"SphereCollider",right:true}
 			]
 		},
 		{
@@ -155,6 +155,7 @@ function showQuestion(id){
 	$(".questionForm input[type='radio']").prop('checked', false);
 	$(".questionForm input[type='submit']").prop('disabled', 'disabled');
 	$(".questionForm input[type='submit']").val("Check");
+	$(".questionForm input[type='radio']").prop("disabled", false);
 }
 function showEnd(){
 	$(".start").addClass("hidden");
@@ -186,6 +187,7 @@ function handleButtons(){
 			$(".questionForm input[type='submit']").val("Next Answer");
 			var checkedRadio = $(".questionForm input[type='radio']:checked").val();
 			state.user.answered++;
+			$(".questionForm input[type='radio']").prop("disabled", "disabled");
 			if(state.questions[state.user.current].answers[checkedRadio].right){
 				$(".questionForm .questionNotifier").text("Correct!");
 				$(".questionForm .questionNotifier").removeClass("incorrect");

@@ -50,7 +50,7 @@ button, input[type="submit"]{
 	border-radius: 3px;
 	color: green;
 }
-.start button{
+.start button, .end button{
 	font-size: 40px;
 	padding: 30px;
 	margin: 20px;
